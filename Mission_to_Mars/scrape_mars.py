@@ -3,6 +3,7 @@ from splinter import Browser
 from bs4 import BeautifulSoup
 import time as tm
 import pandas as pd
+import pymongo
 
 def init_browser():
     # Setting Up Splinter
@@ -22,19 +23,18 @@ def scrape_info():
     # Parse with Beautiful Soup
     soup = BeautifulSoup(html, 'html.parser')
 
-
     # Scraping for Latest Title
-    slidebar = soup.find('li', class_='slide')
-    categories = slidebar.find_all('div', class_='content_title')
-    for category in categories:
-        news_title = category.text.strip()
-
+    #slidebar = soup.find('li', class_='slide')
+   # categories = slidebar.find_all('div', class_='content_title')
+    #for category in categories:
+   #     news_title = category.text.strip()
+    news_title = soup.find("div", class_="content_title").text
     # Scraping for Latest Paragraph
-    slidebar = soup.find('li', class_='slide')
-    categories = slidebar.find_all('div', class_='article_teaser_body')
-    for category in categories:
-        news_p = category.text.strip()
-
+   # slidebar = soup.find('li', class_='slide')
+   # categories = slidebar.find_all('div', class_='article_teaser_body')
+   # for category in categories:
+   #     news_p = category.text.strip()
+    news_p = soup.find("div",class_="article_teaser_body").text
 
     # Creating Mars Data Table
     # URL Path to Mars Facts
